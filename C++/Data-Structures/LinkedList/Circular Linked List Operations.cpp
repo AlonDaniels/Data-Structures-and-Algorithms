@@ -86,6 +86,26 @@ struct Node *addAfter(struct Node *last, int data, int item)
 
 }
 
+//Delete a Node in cll. Return true if succeeded or false on failure.
+bool deleteNode(struct Node *last, struct Node *toDelete)
+{
+    	struct Node* saveLast = last; //compare to see if we made a full circulation
+	
+	while(last->next != toDelete && last->next != saveLast)
+	{
+		last = last->next;
+	}
+	if(last->next == toDelete) //If found
+	{
+		struct node* temp = last->next;
+		last->next = temp->next;
+		delete(temp);
+		
+		return true;
+	}
+	return false; //If not found at full circulation
+}	
+
 void traverse(struct Node *last)
 {
 	struct Node *p;
